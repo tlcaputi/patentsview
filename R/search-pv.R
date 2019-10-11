@@ -55,9 +55,11 @@ one_request <- function(method, query, base_url, arg_list, ...) {
 
   if (method == "GET") {
     get_url <- get_get_url(query, base_url, arg_list)
+    print(get_url)
     resp <- httr::GET(get_url, ua, ...)
   } else {
     body <- get_post_body(query, arg_list)
+    print(get_url)
     resp <- httr::POST(base_url, body, ua, ...)
   }
 
@@ -80,6 +82,9 @@ request_apply <- function(ex_res, method, query, base_url, arg_list, ...) {
   tmp <- lapply(1:req_pages, function(i) {
     arg_list$opts$per_page <- 10000
     arg_list$opts$page <- i
+    print(method)
+    print(query)
+    print(base_url)
     x <- one_request(method, query, base_url, arg_list, ...)
     x$data[[1]]
   })
