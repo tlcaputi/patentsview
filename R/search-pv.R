@@ -240,11 +240,14 @@ search_pv <- function(query,
 
   base_url <- get_base(endpoint)
 
+  print(query)
   res <- one_request(method, query, base_url, arg_list, ...)
 
   if (!all_pages) return(res)
 
+  print(query)
   full_data <- request_apply(res, method, query, base_url, arg_list, ...)
+  
   res$data[[1]] <- full_data
 
   res
